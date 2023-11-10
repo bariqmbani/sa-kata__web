@@ -34,10 +34,7 @@ app.use(compression());
 app.disable("x-powered-by");
 
 // Remix fingerprints its assets so we can cache forever.
-app.use(
-  "/build",
-  express.static("public/build", { immutable: true, maxAge: "1y" })
-);
+app.use("/build", express.static("public/build", { immutable: true, maxAge: "1y" }));
 
 // Everything else (like favicon.ico) is cached for an hour. You may want to be
 // more aggressive with this caching.
@@ -82,10 +79,7 @@ async function createDevRequestHandler(initialBuild) {
     broadcastDevReady(build);
   }
   const chokidar = await import("chokidar");
-  chokidar
-    .watch(VERSION_PATH, { ignoreInitial: true })
-    .on("add", handleServerUpdate)
-    .on("change", handleServerUpdate);
+  chokidar.watch(VERSION_PATH, { ignoreInitial: true }).on("add", handleServerUpdate).on("change", handleServerUpdate);
 
   // wrap request handler to make sure its recreated with the latest build for every request
   return async (req, res, next) => {

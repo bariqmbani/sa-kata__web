@@ -1,11 +1,11 @@
 {
-  "name": "",
+  "name": "sa-kata",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev --manual -c \"node --watch-path server.js --watch server.js\"",
+    "dev": "remix dev --manual -c \"nodemon --watch server.js server.js\"",
     "start": "cross-env NODE_ENV=production node ./server.js",
     "typecheck": "tsc"
   },
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@remix-run/dev": "^2.2.0",
     "@remix-run/eslint-config": "^2.2.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.2.1",
     "@types/compression": "^1.7.2",
     "@types/express": "^4.17.17",
     "@types/morgan": "^1.9.4",
@@ -34,6 +35,10 @@
     "@types/source-map-support": "^0.5.6",
     "chokidar": "^3.5.3",
     "eslint": "^8.38.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
     "typescript": "^5.1.6"
   },
   "engines": {
