@@ -6,3 +6,6 @@ node_modules
 .env
 
 .vscode/
+
+# ignore the built CSS files from SASS
+app/styles/**/*.css

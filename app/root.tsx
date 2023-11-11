@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { cssBundleHref } from '@remix-run/css-bundle';
 import type { LinksFunction } from '@remix-run/node';
 import {
@@ -9,11 +11,20 @@ import {
   ScrollRestoration
 } from '@remix-run/react';
 
+import stylesRef from '~/styles/main.css';
+
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : [])
+  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+  {
+    rel: 'stylesheet',
+    href: stylesRef
+  }
 ];
 
 export default function App() {
+  useEffect(() => {
+    console.log('App mounted');
+  });
   return (
     <html lang="en">
       <head>
