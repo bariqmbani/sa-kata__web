@@ -1,41 +1,29 @@
 import type { MetaFunction } from '@remix-run/node';
-
-export const meta: MetaFunction = () => {
-  return [
-    { title: 'New Remix App' },
-    { name: 'description', content: 'Welcome to Remix!' }
-  ];
-};
+import { useNavigate } from '@remix-run/react';
 
 export default function Index() {
+  const navigate = useNavigate();
+
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quick start Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="container is-centered">
+      <div className="main-menu__wrapper">
+        <div className="title mb-5">
+          <h1>Sa-Kata</h1>
+          <div className="tag">
+            <span>versi alpha</span>
+          </div>
+        </div>
+        <button className="btn">Mulai Permainan</button>
+        <button
+          className="btn"
+          onClick={() => navigate('/cara-bermain', { state: { from: '/' } })}
+        >
+          Cara Bermain
+        </button>
+        <button className="btn is-disabled">Papan Peringkat</button>
+      </div>
     </div>
   );
 }
+
+export const meta: MetaFunction = () => [{ title: 'Sa-Kata | Menu Utama' }];

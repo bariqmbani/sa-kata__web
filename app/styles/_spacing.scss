@@ -1,0 +1,71 @@
+// margins
+@for $i from 0 through 5 {
+    $size: $i * 10px;
+
+    .m-#{$i} {
+        @extend .mx-#{$i};
+        @extend .my-#{$i};
+    }
+
+    .mx-#{$i} {
+        @extend .mr-#{$i};
+        @extend .ml-#{$i};
+    }
+
+    .my-#{$i} {
+        @extend .mt-#{$i};
+        @extend .mb-#{$i};
+    }
+
+    .mt-#{$i} {
+        margin-top: $size;
+    }
+
+    .mr-#{$i} {
+        margin-right: $size;
+    }
+
+    .mb-#{$i} {
+        margin-bottom: $size;
+    }
+
+    .ml-#{$i} {
+        margin-left: $size;
+    }
+}
+
+// paddings
+@for $i from 0 through 5 {
+    $size: $i * 10px;
+
+    .p-#{$i} {
+        @extend .px-#{$i};
+        @extend .py-#{$i};
+    }
+
+    .px-#{$i} {
+        @extend .pr-#{$i};
+        @extend .pl-#{$i};
+    }
+
+    .py-#{$i} {
+        @extend .pt-#{$i};
+        @extend .pb-#{$i};
+    }
+
+    .pt-#{$i} {
+        padding-top: $size;
+    }
+
+    .pr-#{$i} {
+        padding-right: $size;
+    }
+
+    .pb-#{$i} {
+        padding-bottom: $size;
+    }
+
+    .pl-#{$i} {
+        padding-left: $size;
+    }
+}

@@ -1,5 +1,156 @@
+@import 'library';
+@import 'reset';
 @import 'variables';
+@import 'mixins';
+@import 'spacing';
 
-html {
-    background: $light-bg;
+html,
+body,
+pre,
+code,
+kbd,
+samp {
+    background: black;
+    font-family: 'Press Start 2P';
+    cursor: default;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    background: $light-bg !important;
+
+    @extend .nes-container;
+    border: none;
+    max-width: 720px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 3em;
+    user-select: none;
+
+    .tag {
+        padding: 0;
+        margin: 0;
+        position: relative;
+        text-align: right;
+        font-size: 0.25em;
+        color: rgb(143, 143, 23);
+    }
+}
+
+.main-menu__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-bottom: 200px;
+}
+
+.btn {
+    @extend .nes-btn;
+    cursor: pointer;
+    @extend .mt-2;
+}
+
+.main-menu__wrapper .btn {
+    min-width: 300px;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 4rem;
+    font-size: 1.5rem;
+    user-select: none;
+
+    svg {
+        cursor: pointer;
+    }
+
+    span {
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+            color: #000000b4;
+        }
+    }
+}
+
+.scrollable {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+
+    // firefox
+    scrollbar-width: none;
+
+    // webkit browsers (chrome, safari, etc.)
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+.how-to-play__wrapper {
+    p {
+        line-height: 2em;
+        margin-bottom: 1.75em;
+    }
+
+    a {
+        color: black;
+        text-decoration: underline;
+
+        &:hover {
+            color: #000000b4;
+            text-decoration: none;
+        }
+    }
+
+    // margin-bottom: 200px;
+}
+
+.how-to-play__example {
+    @extend .nes-container;
+    text-align: center;
+    background: #fff;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+    &:hover .tooltip-text {
+        visibility: visible;
+    }
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: auto;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+
+    /* Position the tooltip */
+    position: absolute;
+    bottom: 110%; /* Position above the parent element */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
 }
