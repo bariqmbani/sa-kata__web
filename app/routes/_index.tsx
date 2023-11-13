@@ -13,7 +13,12 @@ export default function Index() {
             <span>versi alpha</span>
           </div>
         </div>
-        <button className="btn">Mulai Permainan</button>
+        <button
+          className="btn"
+          onClick={() => navigate('/permainan', { state: { from: '/' } })}
+        >
+          Mulai Permainan
+        </button>
         <button
           className="btn"
           onClick={() => navigate('/cara-bermain', { state: { from: '/' } })}

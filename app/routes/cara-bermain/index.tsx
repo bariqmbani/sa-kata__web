@@ -1,34 +1,16 @@
 import type { MetaFunction } from '@remix-run/node';
-import { useLocation, useNavigate } from '@remix-run/react';
 
+import HeaderNav from '~/components/HeaderNav';
 import WordChainExample from '~/components/WordChainExample';
-import ArrowLeft from '~/components/icon/ArrowLeft';
 
 export const meta: MetaFunction = () => {
   return [{ title: 'Sa-Kata | Cara Bermain' }];
 };
 
 export default function Index() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  console.log({ location });
-
-  const toMainMenu = () => {
-    if (location.state?.from === '/') {
-      navigate(-1);
-    } else {
-      navigate('/', { replace: true });
-    }
-  };
-
   return (
     <div className="container">
-      <div className="header-nav">
-        <span onClick={toMainMenu}>
-          <ArrowLeft className="mr-1" />
-        </span>
-        <h1>Cara Bermain</h1>
-      </div>
+      <HeaderNav to="/" text="Cara Bermain" />
       <div className="how-to-play__wrapper mt-2 mb-5 scrollable">
         <section>
           <p>

@@ -154,3 +154,81 @@ body {
     transform: translateX(-50%);
     z-index: 1;
 }
+
+.option-section {
+    @extend .mt-5;
+
+    h2 {
+        @extend .mb-1;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    label {
+        cursor: pointer;
+        @extend .my-1;
+    }
+}
+
+.game__wrapper {
+    .timer {
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+        margin-bottom: 8rem;
+        font-size: 3rem;
+    }
+
+    .text-input {
+        text-align: center;
+        width: 75%;
+        margin: 50px auto 0;
+
+        .skip {
+            margin-top: 1rem;
+            text-align: left;
+        }
+    }
+}
+
+.game__current {
+    @extend .my-5;
+    text-align: center;
+
+    p {
+        font-size: 1.25rem;
+        // font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .skip-icon {
+        @extend .ml-2;
+        cursor: pointer;
+
+        &:hover {
+            color: #000000b4;
+        }
+    }
+}
+
+.input-enter__wrapper {
+    position: relative;
+    // font-size: 1.5rem;
+
+    .input-enter__form {
+        position: absolute;
+        width: 100%;
+        padding: 15px 50px 15px 13px;
+        z-index: 0;
+    }
+
+    .input-enter__icon {
+        position: absolute;
+        top: 10px;
+        right: 5px;
+        z-index: 1;
+        cursor: pointer;
+    }
+}
