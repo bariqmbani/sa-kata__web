@@ -8,7 +8,6 @@ export interface Game {
   option: GameOption;
   startAt: number;
   answers: GameAnswer[];
-  firstWord: GameAnswer;
 }
 
 export interface GameAnswer {
@@ -20,5 +19,7 @@ export interface GameAnswer {
 
 export const games: Game[] = [];
 
-export * from './new-game.api';
-export * from './get-game.api';
+export * from './game/new-game.api';
+export * from './game/get-game.api';
+
+export * from './word/get-word.api';

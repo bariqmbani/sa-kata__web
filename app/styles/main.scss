@@ -230,5 +230,25 @@ body {
         right: 5px;
         z-index: 1;
         cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+
+        &:focus,
+        &:focus-visible,
+        &:focus-within,
+        &::-moz-focus-inner,
+        &::-moz-focus-outer {
+            border: none;
+            outline: none;
+        }
+    }
+}
+
+.current-word {
+    .last-syllables {
+        color: rgb(143, 143, 23);
+        border-bottom: 2px dotted rgb(143, 143, 23);
+        padding-bottom: 5px;
     }
 }

@@ -11,7 +11,10 @@
     "dev:remix": "remix dev --manual -c \"nodemon --watch server.js server.js\"",
     "dev:sass": "sass --no-source-map --watch app/styles:app/styles",
     "dev": "concurrently \"yarn dev:sass\" \"yarn dev:remix\"",
-    "lint": "tsc"
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint --fix . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
     "@16bits/nes.css": "^2.3.2",
@@ -34,6 +37,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.2.1",
     "@types/compression": "^1.7.2",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.8",
     "@types/morgan": "^1.9.4",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
@@ -43,9 +47,11 @@
     "eslint": "^8.38.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "jest": "^29.7.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
+    "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"
   },
   "engines": {
