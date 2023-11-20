@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
 import {
   type ActionFunction,
@@ -17,6 +17,8 @@ import {
 import { postAnswer } from '~/api/service/game/answer.api';
 import CornerDownLeftIcon from '~/components/icon/CornerDownLeftIcon';
 import NextIcon from '~/components/icon/NextIcon';
+
+import AlertIcon from '../components/icon/AlertIcon';
 
 export const loader: LoaderFunction = async ({ params }) => {
   const gameId = params.gameId;
@@ -73,42 +75,50 @@ export default function NewGame() {
     if (!actionData) {
       return;
     }
+    answerInputRef.current!.classList.remove('wrong-answer');
     const { answer } = actionData;
     if (!answer.isCorrect) {
-      alert('salah');
+      setTimeout(() => {
+        answerInputRef.current!.classList.add('wrong-answer');
+      }, 1);
+      setShowAlert(true);
+      setAlertMessage(answer.note!);
       return;
     }
+    setAlertMessage('');
+    setShowAlert(false);
     setCurrentAnswer(answer);
     const { syllables } = answer;
     answerInputRef.current!.value = syllables[syllables.length - 1];
     answerInputRef.current!.focus();
   }, [actionData]);
 
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
   return (
     <div className="container">
       <div className="game__wrapper">
         <h1 className="timer">{duration}</h1>
         <div className="game__current">
-          <p>
+          <div className="current">
             <div className="current-word">
               {currentAnswer.syllables.map((syllable, index) => (
-                <>
+                <Fragment key={index}>
                   {index !== currentAnswer.syllables.length - 1 ? (
-                    <span key={index}>{syllable}</span>
+                    <span>{syllable}</span>
                   ) : (
-                    <span key={index} className="last-syllables">
-                      {syllable}
-                    </span>
+                    <span className="last-syllable">{syllable}</span>
                   )}
-                </>
+                </Fragment>
               ))}
-            </div>{' '}
+            </div>
             {option.allowSkip === 'yes' && (
               <div className="skip-icon">
                 <NextIcon size={42} />
               </div>
             )}
-          </p>
+          </div>
         </div>
         <div className="text-input mt-5">
           <Form method="post">
@@ -131,6 +141,14 @@ export default function NewGame() {
             </div>
           </Form>
         </div>
+        {showAlert && (
+          <div className="alert__wrapper">
+            <div className="alert__content pixel-corners">
+              <AlertIcon size={20} />
+              <span>{alertMessage}</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 export type TestData = { [key: string]: string[] };
 
 export const ngLastSyllables: TestData = {
-  // anjing: ['an', 'jing'],
-  // kucing: ['ku', 'cing'],
-  // kambing: ['kam', 'bing'],
-  // aliang: ['ali', 'ang'],
-  // acung: ['a', 'cung'],
+  anjing: ['an', 'jing'],
+  kucing: ['ku', 'cing'],
+  kambing: ['kam', 'bing'],
+  aliang: ['ali', 'ang'],
+  acung: ['a', 'cung'],
   long: ['long'],
   aong: ['a', 'ong'],
   uang: ['u', 'ang'],
@@ -221,7 +221,7 @@ export const endsWithVV: TestData = {
   siperaseae: ['siperasea', 'e'],
   termae: ['terma', 'e'],
   undae: ['unda', 'e'],
-  wadilae: ['wadila', 'e'],
-  indie: ['indi', 'e']
+  wadilae: ['wadila', 'e']
+  // indie: ['indi', 'e']
   // honcoe: ['honco', 'e']
 };

@@ -1,12 +1,17 @@
-export default function ArrowLeft({ size = 40, className = '' }) {
+export default function ArrowLeft(
+  props: React.SVGProps<SVGSVGElement> & { size?: number } = {
+    size: 40,
+    className: ''
+  }
+) {
   return (
     <svg
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="4 0 24 24"
-      width={size}
-      height={size}
-      className={className}
+      width={props.size}
+      height={props.size}
+      {...props}
     >
       <path
         className="p-0 m-0"
