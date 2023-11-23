@@ -18,8 +18,8 @@ import {
 import { isWordExists } from '..';
 
 export const identifyLastSyllable = (word: string): string[] => {
-  const directReturn = currentUnhandled(word);
-  if (directReturn) return directReturn;
+  const specialWord = checkSpecialWord(word);
+  if (specialWord) return specialWord;
 
   if (word.endsWith('ng')) return handleEndsWithDiphthong(word);
   if (word.endsWith('sy')) return handleEndsWithDiphthong(word);
@@ -202,7 +202,7 @@ const handleEndsWithVV = (word: string): string[] => {
   return syllables;
 };
 
-const currentUnhandled = (word: string) => {
+const checkSpecialWord = (word: string) => {
   if (word === 'iduladha') return ['idulad', 'ha'];
   if (word === 'menggei') return ['meng', 'gei'];
   if (word === 'menggwei') return ['meng', 'gwei'];

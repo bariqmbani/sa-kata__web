@@ -31,7 +31,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
-  const word = formData.get('answer-word')?.toString();
+  const word = formData.get('answer-word')?.toString().toLowerCase().trim();
   const gameId = params.gameId;
   const answer = postAnswer(gameId!, word!);
   return json({ answer });
@@ -83,6 +83,10 @@ export default function NewGame() {
       }, 1);
       setShowAlert(true);
       setAlertMessage(answer.note!);
+      setTimeout(() => {
+        setShowAlert(false);
+        setAlertMessage('');
+      }, 2000);
       return;
     }
     setAlertMessage('');
@@ -126,6 +130,9 @@ export default function NewGame() {
               <input
                 autoFocus
                 autoComplete="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                autoCorrect="off"
                 type="text"
                 id="answer-word"
                 name="answer-word"

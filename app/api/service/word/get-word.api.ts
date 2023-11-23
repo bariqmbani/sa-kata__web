@@ -7,7 +7,12 @@ export const isWordExists = (word: string) => {
 
 export const getRandomWord = () => {
   const filtered = wordRepository.filter((w) => {
-    return !excludedFirstWords.includes(w) && w.length >= 5;
+    return (
+      !excludedFirstWords.includes(w) &&
+      w.length >= 5 &&
+      /^[a-z -]+$/i.test(w) &&
+      w.charAt(0).match(/[a-z]/i)
+    );
   });
   const randomIndex = Math.floor(Math.random() * filtered.length);
   return filtered[randomIndex];
