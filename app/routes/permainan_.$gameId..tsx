@@ -10,14 +10,16 @@ import {
   Form,
   useActionData,
   useLoaderData,
-  useNavigate
+  useNavigate,
+  useSubmit
 } from '@remix-run/react';
 
 import {
   type Game,
   type GameAnswer,
   getCurrentGameAnswer,
-  getGame
+  getGame,
+  getWordStartsWith
 } from '~/api/service';
 import { postAnswer } from '~/api/service/game/answer.api';
 import {
@@ -25,10 +27,9 @@ import {
   countCorrectAnswers,
   getPerformance
 } from '~/api/service/game/game-report';
+import AlertIcon from '~/components/icon/AlertIcon';
 import CornerDownLeftIcon from '~/components/icon/CornerDownLeftIcon';
 import NextIcon from '~/components/icon/NextIcon';
-
-import AlertIcon from '../components/icon/AlertIcon';
 
 export const loader: LoaderFunction = async ({ params }) => {
   const gameId = params.gameId;
@@ -42,8 +43,9 @@ export const loader: LoaderFunction = async ({ params }) => {
 export const action: ActionFunction = async ({ request, params }) => {
   const formData = await request.formData();
   const word = formData.get('answer-word')?.toString().toLowerCase().trim();
+  const isFromSkip = formData.get('is-from-skip')?.toString() === 'true';
   const gameId = params.gameId;
-  const answer = postAnswer(gameId!, word!);
+  const answer = postAnswer(gameId!, word!, isFromSkip);
   return json({ answer });
 };
 
@@ -121,6 +123,19 @@ export default function NewGame() {
 
   const [showGameOver, setShowGameOver] = useState(false);
 
+  const submit = useSubmit();
+  const onSkipClick = () => {
+    const { syllables } = currentAnswer;
+    const word = getWordStartsWith(syllables[syllables.length - 1]);
+    answerInputRef.current!.value = word;
+    answerInputRef.current!.focus();
+    const formData = new FormData();
+    formData.append('answer-word', word);
+    formData.append('is-from-skip', 'true');
+
+    submit(formData, { method: 'post' });
+  };
+
   return (
     <div className="container">
       {showGameOver && (
@@ -154,9 +169,6 @@ export default function NewGame() {
                 .
               </p>
             </div>
-            {/* <div className="modal-footer">
-              <button className="nes-btn">Kembali</button>
-            </div> */}
           </div>
         </div>
       )}
@@ -177,7 +189,7 @@ export default function NewGame() {
             </div>
             {option.allowSkip === 'yes' && (
               <div className="skip-icon">
-                <NextIcon size={42} />
+                <NextIcon size={42} onClick={onSkipClick} />
               </div>
             )}
           </div>

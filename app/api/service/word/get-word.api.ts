@@ -23,6 +23,20 @@ export const getCurrentGameAnswer = (answers: GameAnswer[]): GameAnswer => {
   return correctAnswers[correctAnswers.length - 1];
 };
 
+export const getWordStartsWith = (startsWith: string) => {
+  const filtered = wordRepository.filter((w) => {
+    return (
+      !excludedFirstWords.includes(w) &&
+      w.length >= 5 &&
+      /^[a-z-]+$/i.test(w) &&
+      w.charAt(0).match(/[a-z]/i) &&
+      w.startsWith(startsWith)
+    );
+  });
+  const randomIndex = Math.floor(Math.random() * filtered.length);
+  return filtered[randomIndex] || getRandomWord();
+};
+
 const excludedFirstWords = [
   'strok',
   'stembusakkoord',
