@@ -2,8 +2,8 @@ import { redirect, useFetcher } from 'react-router-dom';
 
 import type { ActionFunction } from '@remix-run/node';
 
-import type { GameOption } from '~/api/game';
-import { createGame } from '~/api/game/';
+import type { GameOption } from '~/api/service';
+import { createGame } from '~/api/service';
 import HeaderNav from '~/components/HeaderNav';
 
 export const action: ActionFunction = async ({ request }) => {
@@ -68,6 +68,7 @@ export default function Index() {
                 type="radio"
                 name="allowSkip"
                 value="yes"
+                defaultChecked
               />
               <span>Ya</span>
             </label>
@@ -79,7 +80,6 @@ export default function Index() {
                 type="radio"
                 name="allowSkip"
                 value="no"
-                defaultChecked
               />
               <span>Tidak</span>
             </label>

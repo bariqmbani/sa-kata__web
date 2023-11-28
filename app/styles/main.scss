@@ -3,6 +3,8 @@
 @import 'variables';
 @import 'mixins';
 @import 'spacing';
+@import 'keyframes';
+@import 'modal';
 
 html,
 body,
@@ -182,6 +184,7 @@ body {
     .text-input {
         text-align: center;
         width: 75%;
+        max-width: 300px;
         margin: 50px auto 0;
 
         .skip {
@@ -204,7 +207,7 @@ body {
     }
 
     .skip-icon {
-        @extend .ml-2;
+        @extend .ml-1;
         cursor: pointer;
 
         &:hover {
@@ -215,20 +218,111 @@ body {
 
 .input-enter__wrapper {
     position: relative;
+    margin: 0 auto;
+    padding: 0;
     // font-size: 1.5rem;
 
     .input-enter__form {
         position: absolute;
         width: 100%;
         padding: 15px 50px 15px 13px;
+        margin: 0;
         z-index: 0;
     }
 
     .input-enter__icon {
         position: absolute;
-        top: 10px;
+        top: 5px;
         right: 5px;
         z-index: 1;
         cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+        padding-left: 5px;
+
+        &:focus,
+        &:focus-visible,
+        &:focus-within,
+        &::-moz-focus-inner,
+        &::-moz-focus-outer {
+            border: none;
+            outline: none;
+        }
     }
+}
+
+.current {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .current-word {
+        padding: 15px;
+        .last-syllable {
+            color: rgb(143, 143, 23);
+            border-bottom: 2px dotted rgb(143, 143, 23);
+            padding-bottom: 5px;
+        }
+    }
+}
+
+.wrong-answer {
+    @extend .is-error;
+    transition: border 0.3s ease-in-out;
+    animation: horizontal-shaking 0.3s ease-in-out;
+}
+
+.alert__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: -100px;
+    padding: 0;
+    margin: 0;
+}
+
+.alert__content {
+    animation: fade 0.3s ease-in-out;
+    background: #e76e54;
+    position: absolute;
+    padding: 10px 15px;
+    font-size: 0.75rem;
+    min-width: 310px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    user-select: none;
+
+    span {
+        margin-left: 10px;
+    }
+}
+
+.pixel-corners {
+    clip-path: polygon(
+        0px calc(100% - 4px),
+        2px calc(100% - 4px),
+        2px calc(100% - 2px),
+        4px calc(100% - 2px),
+        4px 100%,
+        calc(100% - 4px) 100%,
+        calc(100% - 4px) calc(100% - 2px),
+        calc(100% - 2px) calc(100% - 2px),
+        calc(100% - 2px) calc(100% - 4px),
+        100% calc(100% - 4px),
+        100% 4px,
+        calc(100% - 2px) 4px,
+        calc(100% - 2px) 2px,
+        calc(100% - 4px) 2px,
+        calc(100% - 4px) 0px,
+        4px 0px,
+        4px 2px,
+        2px 2px,
+        2px 4px,
+        0px 4px
+    );
 }

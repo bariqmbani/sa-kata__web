@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from '@remix-run/react';
 
-import ArrowLeft from './icon/ArrowLeft';
+import ArrowLeft from './icon/ArrowLeftIcon';
 
 export default function HeaderNav({ text, to }: { text: string; to: string }) {
   const navigate = useNavigate();

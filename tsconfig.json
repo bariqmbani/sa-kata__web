@@ -2,9 +2,14 @@
   "include": [
     "remix.env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "./server.js"
   ],
+  "ts-node": {
+    "esm": true
+  },
   "compilerOptions": {
+    "module": "ES2022",
     "lib": [
       "DOM",
       "DOM.Iterable",
