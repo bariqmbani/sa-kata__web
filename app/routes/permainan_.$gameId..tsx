@@ -6,7 +6,12 @@ import {
   json,
   redirect
 } from '@remix-run/node';
-import { Form, useActionData, useLoaderData } from '@remix-run/react';
+import {
+  Form,
+  useActionData,
+  useLoaderData,
+  useNavigate
+} from '@remix-run/react';
 
 import {
   type Game,
@@ -15,6 +20,11 @@ import {
   getGame
 } from '~/api/service';
 import { postAnswer } from '~/api/service/game/answer.api';
+import {
+  countAnswersAccuracy,
+  countCorrectAnswers,
+  getPerformance
+} from '~/api/service/game/game-report';
 import CornerDownLeftIcon from '~/components/icon/CornerDownLeftIcon';
 import NextIcon from '~/components/icon/NextIcon';
 
@@ -38,6 +48,8 @@ export const action: ActionFunction = async ({ request, params }) => {
 };
 
 export default function NewGame() {
+  const navigate = useNavigate();
+
   const { game }: { game: Game } = useLoaderData<typeof loader>();
   const { option, startAt, answers } = game;
 
@@ -64,6 +76,13 @@ export default function NewGame() {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (duration <= 0) {
+      answerInputRef.current!.blur();
+      setShowGameOver(true);
+    }
+  }, [duration]);
 
   const actionData: { answer: GameAnswer } = useActionData<typeof action>();
   const [currentAnswer, setCurrentAnswer] = useState(
@@ -100,8 +119,47 @@ export default function NewGame() {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
+  const [showGameOver, setShowGameOver] = useState(false);
+
   return (
     <div className="container">
+      {showGameOver && (
+        <div className="modal">
+          <div className="modal-content">
+            <div className="modal-header">
+              {/* <Link to="/permainan"> */}
+              <span className="close" onClick={() => navigate('/permainan')}>
+                &times;
+              </span>
+              {/* </Link> */}
+              <h2>Waktu Habis</h2>
+            </div>
+            <div className="modal-body">
+              <p>
+                Anda menunjukkan performa permainan yang {getPerformance(game)}.
+              </p>
+              <p>
+                Dalam waktu{' '}
+                <span className="modal-body__highlight">
+                  {option.duration} detik
+                </span>
+                , Anda berhasil menyambungkan{' '}
+                <span className="modal-body__highlight">
+                  {countCorrectAnswers(answers)} kata
+                </span>{' '}
+                dengan{' '}
+                <span className="modal-body__highlight">
+                  akurasi {countAnswersAccuracy(answers)}%
+                </span>
+                .
+              </p>
+            </div>
+            {/* <div className="modal-footer">
+              <button className="nes-btn">Kembali</button>
+            </div> */}
+          </div>
+        </div>
+      )}
       <div className="game__wrapper">
         <h1 className="timer">{duration}</h1>
         <div className="game__current">

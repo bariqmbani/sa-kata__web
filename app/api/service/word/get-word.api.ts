@@ -10,7 +10,7 @@ export const getRandomWord = () => {
     return (
       !excludedFirstWords.includes(w) &&
       w.length >= 5 &&
-      /^[a-z -]+$/i.test(w) &&
+      /^[a-z-]+$/i.test(w) &&
       w.charAt(0).match(/[a-z]/i)
     );
   });
@@ -24,6 +24,7 @@ export const getCurrentGameAnswer = (answers: GameAnswer[]): GameAnswer => {
 };
 
 const excludedFirstWords = [
+  'strok',
   'stembusakkoord',
   // CCC
   'kulturkampf',
