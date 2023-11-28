@@ -4,6 +4,6 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     quotes: [2, 'single', { avoidEscape: true }],
-    'prettier/prettier': ['error', { jsxSingleQuote: false }]
+    'prettier/prettier': ['error', { jsxSingleQuote: false, endOfLine: 'auto' }]
   }
 };
