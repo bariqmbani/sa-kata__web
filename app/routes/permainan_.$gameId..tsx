@@ -3,6 +3,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import {
   type ActionFunction,
   type LoaderFunction,
+  type MetaFunction,
   json,
   redirect
 } from '@remix-run/node';
@@ -30,6 +31,10 @@ import {
 import AlertIcon from '~/components/icon/AlertIcon';
 import CornerDownLeftIcon from '~/components/icon/CornerDownLeftIcon';
 import NextIcon from '~/components/icon/NextIcon';
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Sa-Kata | Permainan' }];
+};
 
 export const loader: LoaderFunction = async ({ params }) => {
   const gameId = params.gameId;

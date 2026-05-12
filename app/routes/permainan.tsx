@@ -1,10 +1,14 @@
 import { redirect, useFetcher } from 'react-router-dom';
 
-import type { ActionFunction } from '@remix-run/node';
+import type { ActionFunction, MetaFunction } from '@remix-run/node';
 
 import type { GameOption } from '~/api/service';
 import { createGame } from '~/api/service';
 import HeaderNav from '~/components/HeaderNav';
+
+export const meta: MetaFunction = () => {
+  return [{ title: 'Sa-Kata | Permainan' }];
+};
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
